@@ -33,6 +33,7 @@ const fetchCountries = async() => {
         //console.log(data);
 
         data.forEach((el) => {
+            console.log(`object`, el);
             console.log(el.flag);
             console.log(
                 `Country Name - ${el.name}, Region - ${el.region}, Sub-Region-${el.subregion}, Population - ${el.population}`
