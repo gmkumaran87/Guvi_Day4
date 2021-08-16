@@ -23,31 +23,27 @@ const URL = "https://restcountries.eu/rest/v2/all";
 let country = [];
 
 const fetchCountries = async() => {
-    try {
-        const result = await fetch(URL);
+    const result = await fetch(URL);
+    const xhr = new XMLHttpRequest();
 
-        if (!result.ok) {
-            throw new Error("Something went wrong!");
-        }
-        const data = await result.json();
-        //console.log(data);
+    xhr.open("GET", URL);
+
+    xhr.onload = () => {
+        const res = xhr.response;
+
+        const data = JSON.parse(res);
 
         data.forEach((el) => {
-            console.log(`object`, el);
             console.log(el.flag);
             console.log(
                 `Country Name - ${el.name}, Region - ${el.region}, Sub-Region-${el.subregion}, Population - ${el.population}`
             );
         });
+    };
 
-        return data;
-    } catch (error) {
-        console.log(`Something went wrong... ${error}`);
-    }
+    xhr.send();
 };
 
 console.log(`Displaying Country data`);
 
-const countries = fetchCountries();
-
-console.log(countries);
+fetchCountries();
